@@ -1,0 +1,6 @@
+# dataset.yaml
+train: D:\YoloAllProjects\Projects\Foot_Ulcer\dataset\train\images
+val: D:\YoloAllProjects\Projects\Foot_Ulcer\dataset\val\images
+
+nc: 1  # number of classes
+names: ['Ulcer']  # list of class names
