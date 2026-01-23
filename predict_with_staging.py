@@ -14,10 +14,13 @@ class UlcerStageClassifier:
     def __init__(self, config_path="stage_config.yaml"):
         """
         Initialize the ulcer staging classifier
-        """
+        """        
         # Load configuration
         with open(config_path, 'r') as f:
             self.config = yaml.safe_load(f)
+        
+        # Validate stage metadata keys
+        self._validate_stage_metadata()
         
         # Load the trained stage classification model
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -32,6 +35,24 @@ class UlcerStageClassifier:
             transforms.Normalize(mean=[0.485, 0.456, 0.406], 
                                std=[0.229, 0.224, 0.225])
         ])
+
+    def _validate_stage_metadata(self):
+        """
+        Validate that all required stage metadata keys (0-3) are present
+        """
+        required_keys = [0, 1, 2, 3]
+        metadata_sections = ['stage_names', 'stage_descriptions', 'stage_colors']
+        
+        for section in metadata_sections:
+            if section not in self.config:
+                raise ValueError(f"Missing required section '{section}' in config")
+            
+            # Check that all required keys are present
+            for key in required_keys:
+                if key not in self.config[section]:
+                    raise ValueError(f"Missing key {key} in {section}")
+        
+        print("✓ Stage metadata validation passed")
 
     def load_model(self):
         """
@@ -70,10 +91,10 @@ class UlcerStageClassifier:
             stage_idx = predicted.item()
             stage_confidence = confidence.item()
             
-            # Get stage name and description
-            stage_name = self.config['stage_names'][str(stage_idx)]
-            stage_description = self.config['stage_descriptions'][str(stage_idx)]
-            stage_color = self.config['stage_colors'][str(stage_idx)]
+            # Get stage name and description using integer keys
+            stage_name = self.config['stage_names'][stage_idx]
+            stage_description = self.config['stage_descriptions'][stage_idx]
+            stage_color = self.config['stage_colors'][stage_idx]
         
         return stage_idx, stage_name, stage_description, stage_color, stage_confidence
 
