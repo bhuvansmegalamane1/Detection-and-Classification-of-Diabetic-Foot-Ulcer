@@ -74,7 +74,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("📤 Original Image")
     if st.session_state.uploaded_image:
-        st.image(st.session_state.uploaded_image, caption="Uploaded Image", use_column_width=True)
+        st.image(st.session_state.uploaded_image, caption="Uploaded Image")
     else:
         st.info("Please upload an image to begin analysis")
 
@@ -82,7 +82,7 @@ with col2:
     st.subheader("🔍 Detection Result")
     if st.session_state.detection_results:
         st.image(st.session_state.detection_results['processed_image'], 
-                caption="Detection Result", use_column_width=True)
+                caption="Detection Result")
     elif st.session_state.uploaded_image and analyze_btn:
         with st.spinner("Processing image... Please wait"):
             try:
@@ -116,7 +116,9 @@ with col2:
                         for file in os.listdir(result_dir):
                             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                                 result_path = os.path.join(result_dir, file)
-                                processed_image = Image.open(result_path)
+                                # Open and copy the image to avoid file locking
+                                with Image.open(result_path) as img:
+                                    processed_image = img.copy()
                                 
                                 # Extract detection info
                                 result = results[0]
