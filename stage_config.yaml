@@ -1,0 +1,35 @@
+stage_classifier:
+  model_path: "models/stage_classifier_best.pth"
+  model_type: "efficientnet_b0"
+  num_classes: 4
+  input_size: 224
+  
+stage_names:
+  0: "Stage 1: Superficial"
+  1: "Stage 2: Deep"
+  2: "Stage 3: Infected"
+  3: "Stage 4: Gangrene"
+  
+stage_descriptions:
+  0: "Superficial ulcer affecting epidermis only"
+  1: "Deep ulcer extending to subcutaneous tissue"
+  2: "Infected ulcer with abscess or osteomyelitis"
+  3: "Gangrene with tissue necrosis (critical)"
+  
+stage_detailed_info:
+  0: "Stage 1 ulcers are characterized by partial or full-thickness wounds confined to the skin surface. The epidermis and possibly dermis are affected, but no penetration to deeper tissues occurs. These ulcers appear as shallow wounds and may show redness or minor skin breaks. Treatment typically involves wound cleaning, moisture management, and pressure relief."
+  1: "Stage 2 ulcers extend through the dermis into subcutaneous tissue, exposing underlying structures like tendons, joint capsules, or bone. These ulcers have more pronounced depth compared to Stage 1 and show visible deeper tissue involvement. Treatment requires more intensive wound care, possible surgical intervention, and infection prevention measures."
+  2: "Stage 3 ulcers are deep wounds with signs of active infection, abscess formation, or osteomyelitis. Characteristics include pus, discharge, inflammation, swelling, warmth, or systemic infection indicators. Redness may extend beyond wound edges. Treatment involves antibiotics, aggressive wound care, and possible surgical debridement."
+  3: "Stage 4 ulcers represent tissue necrosis with gangrenous changes. Characterized by blackened, dead tissue indicating critical ischemia or severe infection. These ulcers show extensive tissue death with dark coloration indicating gangrene. This is a critical condition requiring immediate medical intervention, possible amputation, and aggressive treatment to prevent sepsis."
+  
+stage_treatment_guidance:
+  0: "Treatment: Regular cleaning, moisture management, protective dressings, off-loading pressure, monitoring for progression."
+  1: "Treatment: Advanced wound care, possible surgical intervention, infection prevention, specialist consultation."
+  2: "Treatment: Antibiotics, aggressive debridement, infection control, hospitalization may be required."
+  3: "Treatment: Emergency medical intervention, possible amputation, intensive care, sepsis prevention."
+  
+stage_colors:
+  0: "#ffc107"
+  1: "#fd7e14"
+  2: "#dc3545"
+  3: "#a71d2a"

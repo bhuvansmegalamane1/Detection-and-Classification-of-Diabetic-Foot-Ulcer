@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.Python
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Data & models (DON'T COMMIT THESE)
+data/
+dataset/
+datasetNew/
+datasetold/
+datasets/
+models/
+runs/
+output/
+*.h5
+*.pt
+*.pth
+*.onnx
+*.weights
+*.ckpt
+
+# Logs and temp files
+logs/
+*.log
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git LFS (for large files if needed later)
+*.zip
+*.tar.gz

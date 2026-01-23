@@ -1,0 +1,9 @@
+# Dataset configuration for ulcer staging
+path: ./dataset_staged  # Root folder containing train/val/test
+train: ./dataset_staged/train  # Training images folder
+val: ./dataset_staged/val  # Validation images folder
+test: ./dataset_staged/test  # Optional test images folder
+
+# Classes for ulcer staging (using the two-stage approach)
+nc: 4  # Number of classes
+names: ['Stage1_Superficial', 'Stage2_Deep', 'Stage3_Infected', 'Stage4_Gangrene']  # Class names
