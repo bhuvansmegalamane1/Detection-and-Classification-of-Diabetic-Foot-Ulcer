@@ -46,38 +46,32 @@ To increase the accuracy of the foot ulcer detection system, the following impro
 
 ### Enhanced Inference Script
 - Improved `TestWithImage.py` with better error handling
-- Automatic model path detection for easier usage
-- Detailed result reporting with confidence scores
-
-## 5. GUI Improvements
-
-### Enhanced User Interface
-- Updated GUI to use the high accuracy model
+## 5. Web Interface (Streamlit) Improvements
+- Replaced internal emotion-cache based CSS with more robust styling
 - Better confidence display with percentage and decimal values
-- Color-coded confidence levels for quick assessment
-- Augmented inference enabled for better accuracy in the GUI
+- Color-coded confidence levels and status (e.g., Pending Clinician Review)
+- Integrated real staging pipeline with medical safety fallbacks
 
 ## 6. Ulcer Staging Feature Addition
 
 ### Two-Stage Pipeline Implementation
 - Added ulcer staging capability using a two-stage approach
-- Detection stage: Uses existing YOLOv8 model to locate ulcers (preserves detection accuracy)
-- Classification stage: New CNN-based model to determine ulcer stage (1-4)
-- Stages follow simplified Wagner classification: Stage 1 (superficial), Stage 2 (deep), Stage 3 (infected), Stage 4 (gangrene)
+- Detection stage: Uses YOLOv8m to locate ulcers (preserves detection accuracy)
+- Classification stage: CNN-based model for stage (1-4) determine
+- Stages follow simplified Wagner criteria: Stage 1 (superficial), Stage 2 (deep), Stage 3 (infected), Stage 4 (gangrene)
 
-### New GUI Elements
-- Added stage display showing predicted ulcer stage
+### Staging UI Elements
+- Added stage display showing predicted medical stage
 - Added stage confidence percentage
-- Added medical description of the identified stage
-- Color-coded stage indicators for visual distinction
-- Stage-specific icons for better user understanding
+- Added medical description and treatment guidance
+- Color-coded indicators for visual severity distinction
 
-### New Scripts and Configuration
+### New Pipeline Scripts
 - Created `stage_config.yaml` for staging model configuration
-- Implemented `train_stage_classifier.py` for stage classification model training
-- Developed `predict_with_staging.py` for two-stage inference pipeline
-- Added `validate_staging.py` for staging system validation
-- Created `STAGING_GUIDE.md` for medical background and implementation guidance
+- Implemented `train_stage_classifier.py` for model training
+- Developed `predict_with_staging.py` for two-stage inference
+- Added `validate_staging.py` for system validation
+- Created `STAGING_GUIDE.md` for clinical background
 
 ## 7. How to Achieve Even Higher Accuracy
 
@@ -106,9 +100,9 @@ python validate_model.py
 python TestWithImage.py
 ```
 
-### Using the GUI
+### Using the Web Application (Recommended)
 ```bash
-python GUI.py
+streamlit run streamlit_app.py
 ```
 
 ## Expected Accuracy Improvements

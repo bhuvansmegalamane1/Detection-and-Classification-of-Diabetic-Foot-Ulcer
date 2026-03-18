@@ -21,7 +21,6 @@ This project implements a two-stage approach for diabetic foot ulcer analysis:
 ```
 Foot_Ulcer/
 ├── streamlit_app.py      # Web application interface
-├── GUI.py               # Desktop GUI application
 ├── train.py             # Model training scripts
 ├── requirements.txt     # Python dependencies
 ├── stage_config.yaml    # Configuration files
@@ -52,10 +51,7 @@ pip install -r requirements.txt
 streamlit run streamlit_app.py
 ```
 
-### Desktop Application
-```bash
-python GUI.py
-```
+> **Note**: The legacy Desktop GUI (`GUI.py`) has been deprecated and removed. All features are now consolidated into the more robust Streamlit web interface.
 
 ## 🏗️ Model Architecture
 

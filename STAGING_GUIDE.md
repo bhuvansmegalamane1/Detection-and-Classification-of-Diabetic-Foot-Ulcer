@@ -93,8 +93,20 @@ dataset_staged/
 ```
 
 ### Training the Stage Classifier
+
+Before training, perform a **Mandatory Preflight Audit**:
+1. **Class coverage**: Ensure `stage1` through `stage4` folders exist in both `train/` and `val/`.
+2. **Data presence**: Each class folder MUST contain at least one valid image. Training will abort if any category is empty.
+3. **Canonical consistency**: The system enforces a fixed label mapping via `configs/stage_config.yaml`.
+
+To train the model:
 ```bash
-python train_stage_classifier.py --config stage_config.yaml --train_dir dataset_staged/train --val_dir dataset_staged/val
+python train_stage_classifier.py --config configs/stage_config.yaml
+```
+
+To validate the model:
+```bash
+python validate_staging.py --config configs/stage_config.yaml
 ```
 
 ### Configuration Options

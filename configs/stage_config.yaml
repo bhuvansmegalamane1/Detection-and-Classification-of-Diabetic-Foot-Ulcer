@@ -3,6 +3,7 @@ stage_classifier:
   model_type: "efficientnet_b0"
   num_classes: 4
   input_size: 224
+  canonical_order: ["stage1", "stage2", "stage3", "stage4"]
   
 stage_names:
   0: "Stage 1: Superficial"
