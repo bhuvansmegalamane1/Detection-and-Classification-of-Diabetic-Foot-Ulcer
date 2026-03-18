@@ -248,6 +248,9 @@ def run_classification():
             max_det=300,  # Maximum detections per image
             save_conf=True  # Save confidence scores
         )
+        
+        # Release model resources
+        del model
 
         # Get the path of the saved result image from the results object
         prediction_result = results[0]
@@ -257,7 +260,7 @@ def run_classification():
                     
             # Verify the file exists before trying to load it
             if os.path.exists(saved_img_path):
-                uploaded = Image.open(saved_img_path)
+                uploaded = Image.open(saved_img_path).copy()
                 # Resize image to fit the display widget while preserving aspect ratio
                 resized_img = resize_image_to_container(uploaded, resultimg)
                 im = ImageTk.PhotoImage(resized_img)
@@ -271,7 +274,7 @@ def run_classification():
                         if file.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
                             saved_img_path = os.path.join(prediction_result.save_dir, file)
                             if os.path.exists(saved_img_path):
-                                uploaded = Image.open(saved_img_path)
+                                uploaded = Image.open(saved_img_path).copy()
                                 # Resize image to fit the display widget while preserving aspect ratio
                                 resized_img = resize_image_to_container(uploaded, resultimg)
                                 im = ImageTk.PhotoImage(resized_img)
