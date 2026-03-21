@@ -260,6 +260,7 @@ def predict_with_staging_instance(image_path, detection_model, stage_classifier)
         results['processed_image'] = processed_image
         
         # Determine overall severity (highest stage detected)
+        results['detections'].sort(key=lambda x: (x['box'][0], x['box'][1])) # Sort spatially for consistency
         max_stage_idx = max([det['stage_idx'] for det in results['detections']])
         highest_stage_detection = next(det for det in results['detections'] if det['stage_idx'] == max_stage_idx)
         results['overall_severity'] = highest_stage_detection['stage_name']
