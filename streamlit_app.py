@@ -90,7 +90,10 @@ st.markdown("""
 # Cache models to avoid reloading on every interaction
 @st.cache_resource
 def load_detection_model():
-    return YOLO("best.pt")
+    model_path = "models/best.pt"
+    if not os.path.exists(model_path):
+        model_path = "best.pt" # Fallback
+    return YOLO(model_path)
 
 @st.cache_resource
 def load_stage_classifier():
