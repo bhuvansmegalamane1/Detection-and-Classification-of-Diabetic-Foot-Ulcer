@@ -161,7 +161,7 @@ def draw_detection_labels(image, detections):
     return image
 
 
-def predict_with_staging(image_path, detection_model_path="best.pt", 
+def predict_with_staging(image_path, detection_model_path="models/best.pt", 
                         config_path="configs/stage_config.yaml"):
     """
     Backward compatibility wrapper that creates new models (avoid using for repeated calls)
@@ -286,7 +286,7 @@ def visualize_results(image_path, results, output_path=None):
     
     # Draw detection boxes with stage information
     for detection in results['detections']:
-        x1, y1, x2, y2 = detection['bbox']
+        x1, y1, x2, y2 = detection['box']
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         
         # Convert hex color to BGR
@@ -298,7 +298,7 @@ def visualize_results(image_path, results, output_path=None):
         
         # Prepare label text
         label = f"{detection['stage_name']} ({detection['stage_confidence']:.2f})"
-        confidence_text = f"Conf: {detection['detection_confidence']:.2f}"
+        confidence_text = f"Conf: {detection['confidence']:.2f}"
         
         # Get text size to draw background rectangle
         (w1, h1), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
@@ -341,8 +341,8 @@ if __name__ == "__main__":
     
     for i, detection in enumerate(results['detections']):
         print(f"  Ulcer {i+1}:")
-        print(f"    BBox: {detection['bbox']}")
-        print(f"    Detection Confidence: {detection['detection_confidence']:.3f}")
+        print(f"    BBox: {detection['box']}")
+        print(f"    Detection Confidence: {detection['confidence']:.3f}")
         print(f"    Stage: {detection['stage_name']}")
         print(f"    Stage Description: {detection['stage_description']}")
         print(f"    Stage Confidence: {detection['stage_confidence']:.3f}")
