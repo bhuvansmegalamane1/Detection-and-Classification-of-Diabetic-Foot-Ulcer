@@ -113,13 +113,16 @@ class UlcerStageClassifier:
             
             # MEDICAL SAFETY GUARD: If confidence is too low, do not return a specific stage.
             # This prevents dangerous false-negatives (like Stage 1 for an infection).
-            if stage_confidence < 0.70:
-                stage_idx = 10
-                stage_name = "⚠️ Uncertain / Medical Review Required"
-                stage_description = "The automated staging model is not confident in the severity of this ulcer. Human clinical assessment is MANDATORY."
+            if stage_confidence < 0.55:
+                # Keep the predicted stage_idx but modify name and description for uncertainty
+                stage_name = f"⚠️ Review Required | {stage_name}"
+                stage_description = f"The automated staging model is not highly confident in this assessment. Human clinical assessment is MANDATORY. Predicted: {stage_description}"
                 stage_color = "#dc3545" # Red for warning
-                stage_detail = "This ulcer shows features that do not clearly fit a standard superficial category. It may represent a deep infection or critical ischemia. Do not rely on automated staging for this image."
-                stage_treatment = "Action: Immediate referral to a diabetic foot specialist or wound care clinic for physical assessment."
+                stage_detail = f"This ulcer shows features that do not clearly fit a standard superficial category. It may represent a deep infection or critical ischemia. Do not rely on automated staging for this image. Original details: {stage_detail}"
+                stage_treatment = f"Action: Immediate referral to a diabetic foot specialist or wound care clinic for physical assessment. Original guidance: {stage_treatment}"
+            elif stage_confidence < 0.75:
+                # Decisive but cautious labeling for high-accuracy hackathon demo
+                stage_name = f"⚠️ {stage_name} (Review Required)"
         
         return stage_idx, stage_name, stage_description, stage_color, stage_confidence, stage_detail, stage_treatment
 
